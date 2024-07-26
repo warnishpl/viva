@@ -1,33 +1,36 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-	display: grid;
-	grid-template-columns: 20px 1fr 10px 2fr 10px 20px;
-	grid-template-rows: 20px 100px 3fr 20px;
-	grid-column-gap: 10px;
-	grid-row-gap: 10px;
+    display: grid;
+    grid-template-columns: minmax(40px, 200px) minmax(150px, 200px) 10px minmax(200px,600px) 10px minmax(40px, 200px);
+    grid-template-rows: 20px 150px 10px calc( 100vh - 200px ) 20px;
 
-	& > button:nth-child(1) {
-		//dodaj tutora
-		grid-area: 2 / 2 / 3 / 3;
-		background-color: red;
-	}
+    & > button:nth-child(1) {
+        //addTutor
+        grid-area: 2 / 2 / 3 / 3;  
+    }
 
-	& > div:nth-child(2) {
-		//przypisz sprzet
-		grid-area: 2 / 4 / 3 / 5;
-		background-color: orange;
-	}
+    & > div:nth-child(2) {
+        //assignEq
+        grid-area: 2 / 4 / 3 / 5;
+        background-color: #B3E5FC; 
+        padding: 10px;
+        border-radius: 5px;
+    }
 
-	& > div:nth-child(3) {
-		//tutorslist
-		grid-area: 3 / 2 / 4 / 3;
-		background-color: yellow;
-	}
+    & > div:nth-child(3) {
+        //tutorslist
+        grid-area: 4 / 2 / 5 / 4;
+        background-color: #E1F5FE; 
+        padding: 10px;
+        border-radius: 5px;
+    }
 
-	& > div:nth-child(4) {
-		//eqList
-		grid-area: 3 / 4 / 4 / 5;
-		background-color: green;
-	}
+    & > div:nth-child(4) {
+        //eqList
+        grid-area: 4 / 4 / 5 / 6;
+        background-color: #E3F2FD; 
+        padding: 10px;
+        border-radius: 5px;
+    }
 `;

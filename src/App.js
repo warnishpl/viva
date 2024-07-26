@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { SetGlobalStyle } from './GlobalStyle'; // Import global style
-import { Wrapper } from './App.styled'; // Import styled wrapper
+import { SetGlobalStyle } from './GlobalStyle'; 
+import { Wrapper } from './App.styled'; 
 import AddTutorPopUp from './components/AddTutorPopUp';
 import AddTutorsListButton from './components/AddTutorsListButton';
 import TutorsList from './components/TutorsList';

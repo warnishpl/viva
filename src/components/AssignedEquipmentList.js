@@ -5,13 +5,13 @@ import {
 	getLocalStorageValue,
 	setLocalStorageValue,
 } from '../utils/functions/localStorageFunctions';
+import ChangeQuantityButton from './ChangeQuantityButton';
 import TransferButton from './TransferButton';
-import ChangeQuantityButton from './ChangeQuantityButton'; // Import the new component
+import { Container, ItemContainer } from './AssignedEquipmentList.styled';
 
 const AssignedEquipmentList = ({
 	tutorsList,
 	selectedTutor,
-	setSelectedTutor,
 	setTutorsList,
 }) => {
 	const [equipmentList, setEquipmentList] = useState(tutorsList);
@@ -27,12 +27,10 @@ const AssignedEquipmentList = ({
 		setEquipmentList(tutorsList);
 	}, [tutorsList]);
 
-	// Filtrowanie tutorów, którzy mają sprzęt
 	const filteredTutors = equipmentList.filter(
 		(tutor) => tutor.equipment && tutor.equipment.length > 0
 	);
 
-	// Filtrowanie sprzętu do wyświetlenia
 	const equipmentToShow = selectedTutor
 		? equipmentList.find((tutor) => tutor.id === selectedTutor)?.equipment || []
 		: filteredTutors.flatMap((tutor) =>
@@ -43,7 +41,6 @@ const AssignedEquipmentList = ({
 				}))
 		  );
 
-	// Sortowanie sprzętu po dacie od najnowszych do najstarszych
 	equipmentToShow.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 	const removeItem = (tutorId, itemId) => {
@@ -57,21 +54,21 @@ const AssignedEquipmentList = ({
 			return tutor;
 		});
 		setEquipmentList(updatedTutors);
-		setTutorsList(updatedTutors); // Update the tutors list in the parent component
+		setTutorsList(updatedTutors);
 		setLocalStorageValue('tutorsList', updatedTutors);
 	};
 
 	return (
-		<div>
+		<Container>
 			{selectedTutor && equipmentToShow.length === 0 ? (
 				<p>Tutor nie posiada żadnego sprzętu.</p>
 			) : (
 				equipmentToShow.map((item, index) => (
-					<div key={index}>
+					<ItemContainer key={index}>
 						{selectedTutor ? (
 							<>
-								<p>Nazwa: {item.name}</p>
-								<p>Ilość: {item.quantity}</p>
+								<span>Nazwa: {item.name}</span>
+								<span>Ilość: {item.quantity}</span>
 								<p>
 									Data wypożyczenia:{' '}
 									<span
@@ -82,21 +79,23 @@ const AssignedEquipmentList = ({
 										{formatDateTime(item.date)}
 									</span>
 								</p>
-								<ChangeQuantityButton
-									item={item}
-									tutorsList={tutorsList}
-									setTutorsList={setTutorsList}
-									selectedTutor={selectedTutor}
-								/>
-								<button onClick={() => removeItem(selectedTutor, item.id)}>
-									Usuń z listy
-								</button>
-								<TransferButton
-									item={item}
-									tutorsList={tutorsList}
-									setTutorsList={setTutorsList}
-									selectedTutor={selectedTutor}
-								/>
+								<div className='button-container'>
+									<ChangeQuantityButton
+										item={item}
+										tutorsList={tutorsList}
+										setTutorsList={setTutorsList}
+										selectedTutor={selectedTutor}
+									/>
+									<button onClick={() => removeItem(selectedTutor, item.id)}>
+										Usuń z listy
+									</button>
+									<TransferButton
+										item={item}
+										tutorsList={tutorsList}
+										setTutorsList={setTutorsList}
+										selectedTutor={selectedTutor}
+									/>
+								</div>
 							</>
 						) : (
 							<>
@@ -113,27 +112,29 @@ const AssignedEquipmentList = ({
 										{formatDateTime(item.date)}
 									</span>
 								</p>
-								<ChangeQuantityButton
-									item={item}
-									tutorsList={tutorsList}
-									setTutorsList={setTutorsList}
-									selectedTutor={item.tutorId}
-								/>
-								<button onClick={() => removeItem(item.tutorId, item.id)}>
-									Usuń z listy
-								</button>
-								<TransferButton
-									item={item}
-									tutorsList={tutorsList}
-									setTutorsList={setTutorsList}
-									selectedTutor={item.tutorId}
-								/>
+								<div className='button-container'>
+									<ChangeQuantityButton
+										item={item}
+										tutorsList={tutorsList}
+										setTutorsList={setTutorsList}
+										selectedTutor={item.tutorId}
+									/>
+									<button onClick={() => removeItem(item.tutorId, item.id)}>
+										Usuń z listy
+									</button>
+									<TransferButton
+										item={item}
+										tutorsList={tutorsList}
+										setTutorsList={setTutorsList}
+										selectedTutor={item.tutorId}
+									/>
+								</div>
 							</>
 						)}
-					</div>
+					</ItemContainer>
 				))
 			)}
-		</div>
+		</Container>
 	);
 };
 

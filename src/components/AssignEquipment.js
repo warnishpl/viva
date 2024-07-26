@@ -1,6 +1,31 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import { LOCALSTORAGE_KEYS } from '../utils/constants/localStorageKeys';
 import { setLocalStorageValue } from '../utils/functions/localStorageFunctions';
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+`;
+
+const Input = styled.input`
+    padding: 10px;
+    border: 1px solid #B3E5FC;
+    border-radius: 5px;
+`;
+
+const Button = styled.button`
+    background-color: #03A9F4;
+    color: #FFFFFF;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #0288D1;
+    }
+`;
 
 const AssignEquipment = ({ tutorsList, selectedTutor, setTutorsList }) => {
     const [equipmentName, setEquipmentName] = useState('');
@@ -26,7 +51,7 @@ const AssignEquipment = ({ tutorsList, selectedTutor, setTutorsList }) => {
                     existingEquipment.quantity += parseInt(quantity, 10);
                 } else {
                     tutor.equipment.push({
-                        id: new Date().getTime(), // Unique ID for the equipment
+                        id: new Date().getTime(), 
                         name: equipmentName,
                         quantity: parseInt(quantity, 10),
                         date: new Date().toISOString(),
@@ -43,21 +68,21 @@ const AssignEquipment = ({ tutorsList, selectedTutor, setTutorsList }) => {
     };
 
     return (
-        <div>
-            <input
+        <Container>
+            <Input
                 type='text'
                 placeholder='Nazwa sprzętu'
                 value={equipmentName}
                 onChange={(e) => setEquipmentName(e.target.value)}
             />
-            <input
+            <Input
                 type='number'
                 placeholder='Ilość'
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
             />
-            <button onClick={handleAssignEquipment}>Przypisz sprzęt</button>
-        </div>
+            <Button onClick={handleAssignEquipment}>Przypisz sprzęt</Button>
+        </Container>
     );
 };
 
