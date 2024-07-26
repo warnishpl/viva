@@ -6,6 +6,7 @@ import {
 	setLocalStorageValue,
 } from '../utils/functions/localStorageFunctions';
 import TransferButton from './TransferButton';
+import ChangeQuantityButton from './ChangeQuantityButton'; // Import the new component
 
 const AssignedEquipmentList = ({
 	tutorsList,
@@ -81,6 +82,12 @@ const AssignedEquipmentList = ({
 										{formatDateTime(item.date)}
 									</span>
 								</p>
+								<ChangeQuantityButton
+									item={item}
+									tutorsList={tutorsList}
+									setTutorsList={setTutorsList}
+									selectedTutor={selectedTutor}
+								/>
 								<button onClick={() => removeItem(selectedTutor, item.id)}>
 									Usuń z listy
 								</button>
@@ -106,6 +113,12 @@ const AssignedEquipmentList = ({
 										{formatDateTime(item.date)}
 									</span>
 								</p>
+								<ChangeQuantityButton
+									item={item}
+									tutorsList={tutorsList}
+									setTutorsList={setTutorsList}
+									selectedTutor={item.tutorId}
+								/>
 								<button onClick={() => removeItem(item.tutorId, item.id)}>
 									Usuń z listy
 								</button>
