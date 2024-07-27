@@ -9,6 +9,24 @@ export const SetGlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
 }
+*::-webkit-scrollbar-track
+{
+	background-color: #E3F2FD;
+    border-radius: 10px;
+}
+
+*::-webkit-scrollbar
+{
+    border-radius: 10px;
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+	background-color: #B3E5FC;
+}
 html,
 body {
     height: 100%;
@@ -16,7 +34,7 @@ body {
     font-family: 'Arial', sans-serif;
 }
 html {
-    font-size: 62.5%;
+    font-size: 1rem;
     scroll-behavior: smooth;
 }
 a {
@@ -32,7 +50,7 @@ select {
     font-family: inherit;
 }
 button {
-	font-size: smaller;
+	font-size: medium;
     border: none;
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0);

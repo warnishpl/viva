@@ -1,20 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { setLocalStorageValue } from '../utils/functions/localStorageFunctions';
+import QuantityPopUp from './QuantityPopUp';
 
 const Container = styled.div`
     display: flex;
     gap: 10px;
     align-items: center;
     width: 100%; 
-`;
-
-const Input = styled.input`
-    padding: 10px;
-    border: 1px solid #B3E5FC;
-    border-radius: 5px;
-    flex: 1; 
-    box-sizing: border-box; 
 `;
 
 const Button = styled.button`
@@ -32,7 +25,6 @@ const Button = styled.button`
 `;
 
 const ChangeQuantityButton = ({ item, tutorsList, setTutorsList, selectedTutor }) => {
-    const [editQuantity, setEditQuantity] = useState(item.quantity);
     const [isEditing, setIsEditing] = useState(false);
 
     const handleChangeQuantity = (newQuantity) => {
@@ -51,26 +43,18 @@ const ChangeQuantityButton = ({ item, tutorsList, setTutorsList, selectedTutor }
             return tutor;
         });
         setTutorsList(updatedTutors);
-        setIsEditing(false);
         setLocalStorageValue('tutorsList', updatedTutors);
     };
 
     return (
         <Container>
-            {isEditing ? (
-                <>
-                    <Input
-                        type='number'
-                        value={editQuantity}
-                        onChange={(e) => setEditQuantity(parseInt(e.target.value, 10) || 0)} // Handle non-numeric input
-                    />
-                    <Button onClick={() => handleChangeQuantity(editQuantity)}>
-                        Zapisz
-                    </Button>
-                    <Button onClick={() => setIsEditing(false)}>Anuluj</Button>
-                </>
-            ) : (
-                <Button onClick={() => setIsEditing(true)}>Zmień ilość</Button>
+            <Button onClick={() => setIsEditing(true)}>Zmień ilość</Button>
+            {isEditing && (
+                <QuantityPopUp
+                    initialQuantity={item.quantity}
+                    handleSave={handleChangeQuantity}
+                    handleClose={() => setIsEditing(false)}
+                />
             )}
         </Container>
     );

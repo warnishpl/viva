@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { isBeforeMidnight } from '../utils/helpers/isBeforeToday';
-import { formatDateTime } from '../utils/helpers/formatDateTime';
 import {
 	getLocalStorageValue,
 	setLocalStorageValue,
 } from '../utils/functions/localStorageFunctions';
-import ChangeQuantityButton from './ChangeQuantityButton';
-import TransferButton from './TransferButton';
-import { Container, ItemContainer } from './AssignedEquipmentList.styled';
+import EquipmentItem from './EquipmentItem';
+import { Container } from './AssignedEquipmentList.styled';
 
 const AssignedEquipmentList = ({
 	tutorsList,
@@ -64,74 +61,14 @@ const AssignedEquipmentList = ({
 				<p>Tutor nie posiada żadnego sprzętu.</p>
 			) : (
 				equipmentToShow.map((item, index) => (
-					<ItemContainer key={index}>
-						{selectedTutor ? (
-							<>
-								<span>Nazwa: {item.name}</span>
-								<span>Ilość: {item.quantity}</span>
-								<p>
-									Data wypożyczenia:{' '}
-									<span
-										style={{
-											color: isBeforeMidnight(item.date) ? 'red' : 'black',
-										}}
-									>
-										{formatDateTime(item.date)}
-									</span>
-								</p>
-								<div className='button-container'>
-									<ChangeQuantityButton
-										item={item}
-										tutorsList={tutorsList}
-										setTutorsList={setTutorsList}
-										selectedTutor={selectedTutor}
-									/>
-									<button onClick={() => removeItem(selectedTutor, item.id)}>
-										Usuń z listy
-									</button>
-									<TransferButton
-										item={item}
-										tutorsList={tutorsList}
-										setTutorsList={setTutorsList}
-										selectedTutor={selectedTutor}
-									/>
-								</div>
-							</>
-						) : (
-							<>
-								<p>Tutor: {item.tutorName}</p>
-								<p>Nazwa: {item.name}</p>
-								<p>Ilość: {item.quantity}</p>
-								<p>
-									Data wypożyczenia:{' '}
-									<span
-										style={{
-											color: isBeforeMidnight(item.date) ? 'red' : 'black',
-										}}
-									>
-										{formatDateTime(item.date)}
-									</span>
-								</p>
-								<div className='button-container'>
-									<ChangeQuantityButton
-										item={item}
-										tutorsList={tutorsList}
-										setTutorsList={setTutorsList}
-										selectedTutor={item.tutorId}
-									/>
-									<button onClick={() => removeItem(item.tutorId, item.id)}>
-										Usuń z listy
-									</button>
-									<TransferButton
-										item={item}
-										tutorsList={tutorsList}
-										setTutorsList={setTutorsList}
-										selectedTutor={item.tutorId}
-									/>
-								</div>
-							</>
-						)}
-					</ItemContainer>
+					<EquipmentItem
+						key={index}
+						item={item}
+						selectedTutor={selectedTutor}
+						tutorsList={tutorsList}
+						setTutorsList={setTutorsList}
+						removeItem={removeItem}
+					/>
 				))
 			)}
 		</Container>
