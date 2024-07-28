@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
     grid-template-columns: 40px minmax(150px, 300px) 10px minmax(200px, 600px) 10px 40px;
     grid-template-rows: 50px 150px 10px calc( 100vh - 260px ) 50px;
 
-    & > button:nth-child(1) {
+    & > div:nth-child(1) {
         //addTutor
         grid-area: 2 / 2 / 3 / 3;  
     }

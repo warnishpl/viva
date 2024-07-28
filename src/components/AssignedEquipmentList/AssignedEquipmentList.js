@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {
 	getLocalStorageValue,
 	setLocalStorageValue,
-} from '../utils/functions/localStorageFunctions';
-import EquipmentItem from './EquipmentItem';
+} from '../../utils/functions/localStorageFunctions';
+import EquipmentItem from '../EquipmentItem/EquipmentItem';
 import { Container } from './AssignedEquipmentList.styled';
 
 const AssignedEquipmentList = ({

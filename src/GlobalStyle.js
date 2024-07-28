@@ -50,11 +50,18 @@ select {
     font-family: inherit;
 }
 button {
-	font-size: medium;
-    border: none;
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0);
-}
+        background-color: #FF5722;
+        color: #FFFFFF;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: medium;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #E64A19;
+        }
+    }
 textarea {
     resize: vertical;
 }

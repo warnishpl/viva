@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+// Styled components
 export const Container = styled.div`
 	padding: 20px;
 	background-color: #ffffff;
@@ -9,33 +9,33 @@ export const Container = styled.div`
 	overflow: auto;
 `;
 
-export const ItemContainer = styled.div`
+export const TutorItem = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	margin-bottom: 5px;
-	padding: 10px;
+	padding: 5px 5px 5px 10px;
 	border: 1px solid #b3e5fc;
 	border-radius: 5px;
-	background-color: #e3f2fd;
+	background-color: ${(props) =>
+		props.$isSelected
+			? '#90CAF9'
+			: props.$hasEquipment
+			? '#ffc1c1'
+			: '#E3F2FD'};
+	cursor: pointer;
 
-
-	.button-container {
-		display: flex;
-		gap: 5px;
+	span {
+		color: ${(props) => (props.$hasOldEquipment ? 'red' : 'black')};
 	}
 
-	.button-container > * {
-		flex: 1;
-		margin: 0;
-	}
-
-	.button-container button {
+	button {
 		background-color: #ff5722;
 		color: #ffffff;
-		padding: 10px 0;
+		padding: 5px 10px;
 		border: none;
 		border-radius: 5px;
 		cursor: pointer;
-		text-align: center;
-		box-sizing: border-box;
 
 		&:hover {
 			background-color: #e64a19;
