@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
 import { Button, FormGroup, Header, Input, PopUpContainer, Select } from './TransferPopUp.styled';
 
-const TransferPopUp = ({ tutorsList, selectedTutor, handleTransfer, handleClose }) => {
+const TransferPopUp = ({ tutorsList, selectedTutor, selectedTutorStock, handleTransfer, handleClose }) => {
     const [quantity, setQuantity] = useState('');
     const [targetTutor, setTargetTutor] = useState('');
 
     const onTransfer = () => {
-        if (quantity <= 0) {
-            alert('Proszę podać ilość.');
+        const quantityNumber = parseInt(quantity, 10);
+
+        if (isNaN(quantityNumber) || quantityNumber <= 0) {
+            alert('Proszę podać prawidłową ilość.');
+            return;
+        }
+        if (quantityNumber > selectedTutorStock) {
+            alert('Podana ilość przekracza stan magazynowy.');
             return;
         }
         if (!targetTutor) {
             alert('Proszę wybrać wychowawcę z listy.');
             return;
         }
-        handleTransfer(quantity, targetTutor);
+        handleTransfer(quantityNumber, targetTutor);
         handleClose();
     };
 

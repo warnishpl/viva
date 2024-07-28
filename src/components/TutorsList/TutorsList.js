@@ -25,10 +25,17 @@ const TutorsList = ({
 			setSelectedTutor(id);
 		}
 	};
+	const sortedTutorsList = [...tutorsList].sort((a, b) => {
+		const nameA = a.name.toLowerCase();
+		const nameB = b.name.toLowerCase();
+		if (nameA < nameB) return -1;
+		if (nameA > nameB) return 1;
+		return 0;
+	});
 
 	return (
 		<Container>
-			{tutorsList.map((tutor) => (
+			{sortedTutorsList.map((tutor) => (
 				<TutorItem
 					key={tutor.id}
 					$isSelected={tutor.id === selectedTutor}

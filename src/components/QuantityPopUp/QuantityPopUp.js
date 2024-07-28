@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
-import { Button, FormGroup, Header, Input, PopUpContainer } from './QuantityPopUp.styled';
-
+import {
+	Button,
+	FormGroup,
+	Header,
+	Input,
+	PopUpContainer,
+} from './QuantityPopUp.styled';
 
 const QuantityPopUp = ({ initialQuantity, handleSave, handleClose }) => {
 	const [quantity, setQuantity] = useState(initialQuantity);
 
 	const onSave = () => {
+		if (quantity <= 0) {
+			alert('Ilość musi być większa niż 0.');
+			return;
+		}
 		handleSave(quantity);
 		handleClose();
 	};

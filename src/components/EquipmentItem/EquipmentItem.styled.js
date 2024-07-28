@@ -13,3 +13,12 @@ export const ItemContainer = styled.div`
 	border-radius: 6px;
 	background-color: #b3e5fc;
 `;
+export const DataWrapper = styled.div`
+	display: flex;
+`;
+export const ColumnWrapper = styled.div`
+	width: 40%;
+	& > :nth-child(2) {
+		margin-top: 10px;
+	}
+`;

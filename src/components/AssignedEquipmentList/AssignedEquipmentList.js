@@ -68,6 +68,7 @@ const AssignedEquipmentList = ({
 						tutorsList={tutorsList}
 						setTutorsList={setTutorsList}
 						removeItem={removeItem}
+						tutorId={item.tutorId}
 					/>
 				))
 			)}
