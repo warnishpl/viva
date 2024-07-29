@@ -4,7 +4,7 @@ import {
 	setLocalStorageValue,
 } from '../../utils/functions/localStorageFunctions';
 import EquipmentItem from '../EquipmentItem/EquipmentItem';
-import { Container } from './AssignedEquipmentList.styled';
+import { Container, Input } from './AssignedEquipmentList.styled'; // Assume Input is styled for search input
 
 const AssignedEquipmentList = ({
 	tutorsList,
@@ -12,6 +12,7 @@ const AssignedEquipmentList = ({
 	setTutorsList,
 }) => {
 	const [equipmentList, setEquipmentList] = useState(tutorsList);
+	const [searchQuery, setSearchQuery] = useState('');
 
 	useEffect(() => {
 		const storedTutorsList = getLocalStorageValue('tutorsList');
@@ -38,7 +39,15 @@ const AssignedEquipmentList = ({
 				}))
 		  );
 
-	equipmentToShow.sort((a, b) => new Date(b.date) - new Date(a.date));
+	const handleSearchChange = (e) => {
+		setSearchQuery(e.target.value);
+	};
+
+	const filteredEquipment = equipmentToShow.filter((item) =>
+		item.name.toLowerCase().includes(searchQuery.toLowerCase())
+	);
+
+	filteredEquipment.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 	const removeItem = (tutorId, itemId) => {
 		const updatedTutors = equipmentList.map((tutor) => {
@@ -57,10 +66,17 @@ const AssignedEquipmentList = ({
 
 	return (
 		<Container>
-			{selectedTutor && equipmentToShow.length === 0 ? (
+			{}
+			<Input
+				type="text"
+				placeholder="Szukaj sprzętu"
+				value={searchQuery}
+				onChange={handleSearchChange}
+			/>
+			{selectedTutor && filteredEquipment.length === 0 ? (
 				<p>Tutor nie posiada żadnego sprzętu.</p>
 			) : (
-				equipmentToShow.map((item, index) => (
+				filteredEquipment.map((item, index) => (
 					<EquipmentItem
 						key={index}
 						item={item}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '../AddTutorPopUp/AddTutorPopUp.styled';
+import { Button } from './AddTutorsListButton.styled'
 import { Logo, LogoContainer, Wrapper } from './AddTutorsListButton.styled';
 import logo from '../../assets/logo.png';
 

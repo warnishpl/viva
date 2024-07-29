@@ -19,3 +19,11 @@ export const ItemContainer = styled.div`
 	border-radius: 5px;
 	background-color: #e3f2fd;
 `;
+
+export const Input = styled.input`
+	padding: 10px;
+	border: 1px solid #b3e5fc;
+	border-radius: 5px;
+	width: 100%;
+	margin-bottom: 10px;
+`;

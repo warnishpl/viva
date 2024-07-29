@@ -43,13 +43,27 @@ const AssignEquipment = ({ tutorsList, selectedTutor, setTutorsList }) => {
 		setQuantity('');
 	};
 
+	const handleEquipmentNameChange = (e) => {
+		const input = e.target.value;
+		setEquipmentName(input);
+
+		try {
+			const parsed = JSON.parse(input);
+			if (parsed.code && parsed.customId) {
+				setEquipmentName(`${parsed.code}#${parsed.customId}`);
+			}
+		} catch (err) {
+			// Input is not valid JSON, ignore error
+		}
+	};
+
 	return (
 		<Container>
 			<Input
 				type='text'
 				placeholder='Nazwa sprzętu'
 				value={equipmentName}
-				onChange={(e) => setEquipmentName(e.target.value)}
+				onChange={handleEquipmentNameChange}
 			/>
 			<Input
 				type='number'
